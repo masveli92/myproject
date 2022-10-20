@@ -4,17 +4,19 @@ import {useEffect} from "react";
 import {moviesListActions} from "../../redux";
 import {MoviesListCards} from "../moviesListCards/MoviesListCards";
 
-const MoviesList = () => {
+const MoviesList = ({query}) => {
     const dispatch = useDispatch();
-    const {moviesList} = useSelector ( state => state.moviesListReducer)
+    const {movies} = useSelector ( state => state.moviesListReducer)
 
     useEffect( ()=>{
-       dispatch(moviesListActions.getMovies())
-    }, []);
+    //    dispatch(moviesListActions.getMovies({page: query.get('page')}))
+    // },  [dispatch, query]);
+    dispatch(moviesListActions.getMovies())
+},  [dispatch]);
 
     return (
         <div>
-            {moviesList.map(movie => <MoviesListCards key ={movie.id} movie = {movie}/>)}
+            {movies.map(movie => <MoviesListCards key ={movie.id} movie = {movie}/>)}
         </div>
     );
 }

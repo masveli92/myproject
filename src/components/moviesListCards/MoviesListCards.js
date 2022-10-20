@@ -4,7 +4,7 @@ const MoviesListCards = ({movie}) => {
 
     return (
         <div>
-            <h3>{movie.title}</h3>
+            <h3>{movie.id}</h3>
         </div>
     );
 };
