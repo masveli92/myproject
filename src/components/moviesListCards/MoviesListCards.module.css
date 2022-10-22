@@ -1,0 +1,10 @@
+.movieBlock{
+    display: flex;
+    flex-direction: column;
+    width: 18%;
+    text-align: center;
+    background: white;
+    margin: 8px;
+    padding: 2px;
+
+}

@@ -1,9 +1,13 @@
-import {MoviesList} from "./components";
+
+import {MoviesListPage} from "./pages";
 
 function App() {
   return (
     <div>
-      <MoviesList/>
+      <MoviesListPage/>
+
+
+
     </div>
   );
 }
