@@ -1,1 +1,4 @@
-export * from './MoviesListPage'
+export * from './MoviePage/MoviePage'
+export * from './MoviesListPage/MoviesListPage'
+export * from './NotFoundPage/NotFoundPage'
+export * from './SearchPage/SearchPage'

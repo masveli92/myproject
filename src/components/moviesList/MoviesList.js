@@ -6,6 +6,7 @@ import {MoviesListCards} from "../moviesListCards/MoviesListCards";
 import css from './MoviesList.module.css'
 
 const MoviesList = ({query}) => {
+
     const dispatch = useDispatch();
     const {moviesList} = useSelector ( state => state.moviesList)
 
@@ -13,7 +14,7 @@ const MoviesList = ({query}) => {
     //    dispatch(moviesListActions.getMovies({page: query.get('page')}))
     // },  [dispatch, query]);
         dispatch(moviesListActions.getMovies())
-    },  []);
+    },  [dispatch]);
 
     return (
         <div className={css.movieList}>
