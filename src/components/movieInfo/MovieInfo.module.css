@@ -1,0 +1,10 @@
+.movieInfoBlock{
+    display: flex;
+    flex-direction: row;
+}
+.movieInfoImage{
+    margin: 20px;
+}
+.movieTitle{
+    text-align: center;
+}
