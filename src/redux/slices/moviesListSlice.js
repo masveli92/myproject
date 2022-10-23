@@ -4,16 +4,16 @@ import {moviesService} from "../../services";
 const initialState ={
     moviesList: [],
     choozenMovie: null,
-    // maxPage: null,
+    maxPage: null,
     // genreId: '',
     errors: null
 }
 
 const getMovies = createAsyncThunk(
     "moviesListSlice/getAll",
-    async (_, {rejectWithValue})=> {
+    async ({page}, {rejectWithValue})=> {
         try {
-            const {data} = await moviesService.getMovies();
+            const {data} = await moviesService.getMovies(page);
             return data
         } catch (e) {
             return rejectWithValue(e.response.data);
@@ -43,7 +43,11 @@ const moviesListSlice = createSlice({
         builder
             .addCase(getMovies.fulfilled, (state, action)=>{
                 state.moviesList = action.payload;
-
+                if (action.payload.total_pages < 500) {
+                    state.maxPage = action.payload.total_pages;
+                } else {
+                    state.maxPage = 500;
+                }
             })
             .addCase(getMovieById.fulfilled,(state,action) =>{
                 state.choozenMovie = action.payload;
