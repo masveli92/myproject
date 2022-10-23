@@ -1,16 +1,24 @@
-// import {useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 
-import {posterURL} from "../../configs";
 import css from './MoviesListCards.module.css'
+import {PosterPreview} from "../posterPreview/PosterPreview";
+
 
 const MoviesListCards = ({movie}) => {
 
+    let navigate = useNavigate();
+
     return (
-        <div className={css.movieBlock}>
-            <img src={posterURL + movie.poster_path}/>
-            <h3>{movie.title} - {movie.vote_average}</h3>
-        </div>
+       <div className={css.movieBlock}
+            onClick={() => {navigate('/movieDetails' + movie.id.toString(), {state: {...movie}})}}>
+            <PosterPreview posterImage= {movie.poster_path}/>
+            <h3>{movie.title} </h3>
+
+       </div>
     );
+
+
+
     // const navigate = useNavigate();
     //
     // return (

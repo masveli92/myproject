@@ -1,9 +1,12 @@
-const PosterPreview = () => {
+import {posterURL} from "../../configs";
+
+const PosterPreview = ({posterImage}) => {
     return (
-        <div>
-          PosterPreview
-        </div>
+
+        <img src={posterURL + posterImage} alt="poster"/>
     );
 };
 
-export {PosterPreview};
+export {
+    PosterPreview
+};

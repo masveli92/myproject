@@ -1,7 +1,11 @@
+import {MovieInfo} from "../../components";
+
 const MoviePage = () => {
     return (
         <div>
-            Movie
+
+            <MovieInfo/>
+
         </div>
     );
 };
