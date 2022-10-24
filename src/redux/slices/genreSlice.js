@@ -2,16 +2,16 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {genreService} from "../../services";
 
 const initialState = {
-    genre: [],
+    genres: [],
     errors: null,
 };
 
 
-const getAll = createAsyncThunk(
-    'genreSlice/getAll',
+const getGenres = createAsyncThunk(
+    'genreSlice/getGenres',
     async (_, {rejectWithValue}) => {
         try {
-            const {data} = await genreService.getAll();
+            const {data} = await genreService.getGenres();
             return data;
         } catch (e) {
             return rejectWithValue(e.response.data);
@@ -25,18 +25,15 @@ const genreSlice = createSlice({
     reducers: {},
     extraReducers: (builder) =>
         builder
-            .addCase(getAll.fulfilled, (state, action) => {
+            .addCase(getGenres.fulfilled, (state, action) => {
                 state.genres = action.payload.genre;
-            })
-            .addCase(getAll.rejected, (state, action) => {
-                state.errors = action.payload;
             })
 });
 
 const {reducer: genreReducer} = genreSlice;
 
 const genreActions = {
-    getAll
+    getGenres
 };
 
 export {

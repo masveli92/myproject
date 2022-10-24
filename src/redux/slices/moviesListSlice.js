@@ -5,15 +5,15 @@ const initialState ={
     moviesList: [],
     choozenMovie: null,
     maxPage: null,
-    // genreId: '',
+    genreId: '',
     errors: null
 }
 
 const getMovies = createAsyncThunk(
-    "moviesListSlice/getAll",
-    async ({page}, {rejectWithValue})=> {
+    "moviesListSlice/getMovies",
+    async ({page, genre}, {rejectWithValue})=> {
         try {
-            const {data} = await moviesService.getMovies(page);
+            const {data} = await moviesService.getMovies(page, genre);
             return data
         } catch (e) {
             return rejectWithValue(e.response.data);
@@ -33,16 +33,29 @@ const getMovieById = createAsyncThunk(
     }
 );
 
+const search = createAsyncThunk(
+    'moviesListSlice/search',
+    async ({query, page}, {rejectWithValue}) => {
+
+        try {
+            const {data} = await moviesService.searchMovies(query, page);
+            return data;
+        } catch (e) {
+            return rejectWithValue(e.response.data);
+        }
+    }
+);
+
 const moviesListSlice = createSlice({
     name: 'moviesListSlice',
     initialState,
     reducers: {
-        filterByGenre: (state, action) => {
-            state.genreId = action.payload.id;
-        },
-        searchByName: (state, action) => {
-            state.searchMovie = action.payload;
-        }
+        // filterByGenre: (state, action) => {
+        //     state.genreId = action.payload.id;
+        // },
+        // searchByName: (state, action) => {
+        //     state.searchMovie = action.payload;
+        // }
     },
     extraReducers: builder =>
         builder
@@ -57,6 +70,11 @@ const moviesListSlice = createSlice({
             .addCase(getMovieById.fulfilled,(state,action) =>{
                 state.choozenMovie = action.payload;
             })
+
+            .addCase(search.fulfilled, (state, action) => {
+                state.moviesList = action.payload.results;
+            })
+
             .addDefaultCase((state, action) => {
                 const [type] = action.type.split('/').splice(-1);
                 if (type === 'rejected') {

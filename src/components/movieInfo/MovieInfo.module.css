@@ -1,6 +1,7 @@
 .movieInfoBlock{
     display: flex;
     flex-direction: row;
+    background: #FCE8BA;
 }
 .movieInfoImage{
     margin: 20px;
