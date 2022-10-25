@@ -18,10 +18,8 @@ const SearchMovies = () => {
 
     useEffect(()=>{
         if(input){
-            // dispatch(moviesListActions.getMoviesBySearch({name: input, page: 1}))
-            dispatch(moviesListActions.getMoviesBySearch({name: input, page: query.get('page')}))
-
-        }
+            dispatch(moviesListActions.getMoviesBySearch({name: input, page: 1}))
+            }
 
     },[input, dispatch, query])
 

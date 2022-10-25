@@ -3,7 +3,7 @@ import {moviesService} from "../../services";
 
 const initialState ={
     moviesList: [],
-    totalPages: 500,
+    totalPages: 1,
     currentPage: 1,
     movieInfo: {},
     moviesSearch:[],
