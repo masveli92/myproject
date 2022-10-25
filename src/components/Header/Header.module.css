@@ -2,7 +2,7 @@
     min-height: 100px;
     background: #C89B89;
     display: flex;
-    justify-content: start;
+    justify-content: space-evenly;
     padding-left: 20px;
     align-items: center;
 }

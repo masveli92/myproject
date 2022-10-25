@@ -1,11 +1,9 @@
-
 import {useSelector} from "react-redux";
 
 import css from './PaginationMoviesList.module.css'
 
 const PaginationMoviesList = ({actualPage, setQuery}) => {
-
-    const {maxPage} = useSelector(state => state.moviesList);
+    const {currentPage} = useSelector(state => state.moviesList);
 
     const firstPage = () => {
         const page = actualPage = 1
@@ -30,11 +28,11 @@ const PaginationMoviesList = ({actualPage, setQuery}) => {
     return (
         <div className={css.pagination}>
 
-                <button onClick={firstPage}>First</button>
-                <button disabled={actualPage<2} onClick={prevPage}>Prew</button>
-                <button > {actualPage}</button>
-                <button disabled={actualPage>499} onClick={nextPage}>next</button>
-                <button onClick={lastPage}>Last</button>
+            <button onClick={firstPage}>First</button>
+            <button disabled={actualPage<2} onClick={prevPage}>Prew</button>
+            <button > {actualPage}</button>
+            <button disabled={actualPage>499} onClick={nextPage}>next</button>
+            <button onClick={lastPage}>Last</button>
 
         </div>
     );

@@ -1,4 +1,6 @@
-const SearchPage = () => {
+const GenreForm = () => {
+
+
     return (
         <div>
             
@@ -6,4 +8,4 @@ const SearchPage = () => {
     );
 };
 
-export {SearchPage};
+export {GenreForm};

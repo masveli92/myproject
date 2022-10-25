@@ -6,7 +6,6 @@ const initialState = {
     errors: null,
 };
 
-
 const getGenres = createAsyncThunk(
     'genreSlice/getGenres',
     async (_, {rejectWithValue}) => {

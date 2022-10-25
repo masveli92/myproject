@@ -1,4 +1,4 @@
-const SearchPage = () => {
+const SearchMovies = () => {
     return (
         <div>
             
@@ -6,4 +6,4 @@ const SearchPage = () => {
     );
 };
 
-export {SearchPage};
+export {SearchMovies};

@@ -1,8 +1,7 @@
 import {NavLink} from "react-router-dom";
 
 import css from './Header.module.css'
-
-
+import {SearchInput} from "../searchInput/searchInput";
 
 
 const Header = () => {
@@ -10,7 +9,7 @@ const Header = () => {
         <div >
             <div className={css.header}>
                 <NavLink to={'/allMovies'}> All movies </NavLink>
-
+                <SearchInput/>
             </div>
         </div>
     );

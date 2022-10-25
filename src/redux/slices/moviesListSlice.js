@@ -3,10 +3,11 @@ import {moviesService} from "../../services";
 
 const initialState ={
     moviesList: [],
-    choozenMovie: null,
-    maxPage: null,
-    genreId: '',
-    errors: null
+    totalPages: 1,
+    currentPage: 1,
+    movieInfo: {},
+    loading: false,
+    errors: null,
 }
 
 const getMovies = createAsyncThunk(
@@ -35,44 +36,35 @@ const getMovieById = createAsyncThunk(
 
 const search = createAsyncThunk(
     'moviesListSlice/search',
-    async ({query, page}, {rejectWithValue}) => {
-
+    async ({name, page}, {rejectWithValue}) => {
         try {
-            const {data} = await moviesService.searchMovies(query, page);
+            const {data} = await moviesService.searchByName(name, page);
             return data;
         } catch (e) {
             return rejectWithValue(e.response.data);
         }
     }
 );
-
 const moviesListSlice = createSlice({
     name: 'moviesListSlice',
     initialState,
-    reducers: {
-        // filterByGenre: (state, action) => {
-        //     state.genreId = action.payload.id;
-        // },
-        // searchByName: (state, action) => {
-        //     state.searchMovie = action.payload;
-        // }
-    },
+    reducers: {},
     extraReducers: builder =>
         builder
             .addCase(getMovies.fulfilled, (state, action)=>{
                 state.moviesList = action.payload;
-                if (action.payload.total_pages < 500) {
-                    state.maxPage = action.payload.total_pages;
-                } else {
-                    state.maxPage = 500;
-                }
+                state.totalPages = action.payload.total_pages;
+                state.currentPage = action.payload.page;
+
             })
             .addCase(getMovieById.fulfilled,(state,action) =>{
-                state.choozenMovie = action.payload;
+                state.movieInfo = action.payload;
             })
 
             .addCase(search.fulfilled, (state, action) => {
-                state.moviesList = action.payload.results;
+                state.moviesList = action.payload;
+                state.totalPages = action.payload.total_pages;
+                state.currentPage = action.payload.page;
             })
 
             .addDefaultCase((state, action) => {
@@ -83,12 +75,11 @@ const moviesListSlice = createSlice({
                     state.errors = null;
                 }
             })
-
 });
 
-const {reducer: moviesListReducer, actions: filterByGenre, searchByName}  = moviesListSlice;
+const {reducer: moviesListReducer, actions }  = moviesListSlice;
 
-const moviesListActions = {getMovies, getMovieById};
+const moviesListActions = {getMovies, getMovieById, search};
 
 export {moviesListActions, moviesListReducer}
 
