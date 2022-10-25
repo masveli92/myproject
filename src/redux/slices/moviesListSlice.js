@@ -3,9 +3,10 @@ import {moviesService} from "../../services";
 
 const initialState ={
     moviesList: [],
-    totalPages: 1,
+    totalPages: 500,
     currentPage: 1,
     movieInfo: {},
+    moviesSearch:[],
     loading: false,
     errors: null,
 }
@@ -26,7 +27,7 @@ const getMovieById = createAsyncThunk(
     "moviesListSlice/getMovieById",
     async ({id}, {rejectWithValue})=> {
         try {
-            const {data} = await moviesService.getMovies(id);
+            const {data} = await moviesService.getMovieById(id);
             return data
         } catch (e) {
             return rejectWithValue(e.response.data);
@@ -34,21 +35,22 @@ const getMovieById = createAsyncThunk(
     }
 );
 
-const search = createAsyncThunk(
-    'moviesListSlice/search',
-    async ({name, page}, {rejectWithValue}) => {
+const getMoviesBySearch = createAsyncThunk(
+    'moviesListSlice/getMoviesBySearch',
+    async ({search}, {rejectWithValue}) => {
         try {
-            const {data} = await moviesService.searchByName(name, page);
+            const {data} = await moviesService.getMoviesBySearch(search);
             return data;
         } catch (e) {
             return rejectWithValue(e.response.data);
         }
     }
 );
+
 const moviesListSlice = createSlice({
     name: 'moviesListSlice',
     initialState,
-    reducers: {},
+    reducers: { },
     extraReducers: builder =>
         builder
             .addCase(getMovies.fulfilled, (state, action)=>{
@@ -61,9 +63,9 @@ const moviesListSlice = createSlice({
                 state.movieInfo = action.payload;
             })
 
-            .addCase(search.fulfilled, (state, action) => {
-                state.moviesList = action.payload;
-                state.totalPages = action.payload.total_pages;
+            .addCase(getMoviesBySearch.fulfilled, (state, action) => {
+                state.moviesSearch = action.payload.results;
+                state.totalPages = action.payload.totalPages;
                 state.currentPage = action.payload.page;
             })
 
@@ -77,9 +79,9 @@ const moviesListSlice = createSlice({
             })
 });
 
-const {reducer: moviesListReducer, actions }  = moviesListSlice;
+const {reducer: moviesListReducer }  = moviesListSlice;
 
-const moviesListActions = {getMovies, getMovieById, search};
+const moviesListActions = {getMovies, getMovieById, getMoviesBySearch};
 
 export {moviesListActions, moviesListReducer}
 

@@ -15,12 +15,10 @@ import css from './MoviesList.module.css'
           dispatch(moviesListActions.getMovies({page: query.get('page')}))
       },  [dispatch, query]);
 
-
         useEffect( ()=>{
           dispatch(genreActions.getGenres())
 
       },  [query, data]);
-
 
    return (
         <div className={css.movieList}>

@@ -4,7 +4,10 @@ import css from './Header.module.css'
 import {SearchInput} from "../searchInput/searchInput";
 
 
+
 const Header = () => {
+
+
     return (
         <div >
             <div className={css.header}>
