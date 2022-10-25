@@ -10,6 +10,7 @@ const SearchPage = () => {
 
     return (
         <div>
+           <PaginationMoviesList actualPage={actualPage} setQuery={setQuery}/>
            <SearchMovies query = {query}/>
            <PaginationMoviesList actualPage={actualPage} setQuery={setQuery}/>
         </div>

@@ -1,5 +1,5 @@
 import {useDispatch} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import {useState} from "react";
 
 import {moviesListActions} from "../../redux";
@@ -14,12 +14,13 @@ const SearchInput = () => {
         setInputValue(e.target.value);
     };
 
-    const search = (query) => {
-        if (inputValue) {
-            dispatch(moviesListActions.getMoviesBySearch(inputValue));
+    const search = () => {
+        if (inputValue.length>1) {
+            dispatch(moviesListActions.getMoviesBySearch({name:inputValue,page:1}));
             navigate(`/movieSearch?query =${inputValue}`);
             setInputValue('');
         } };
+
 
     const keyPress = e => {
         if (e.code === 'Enter') {

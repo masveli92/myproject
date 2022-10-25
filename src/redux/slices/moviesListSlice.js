@@ -37,9 +37,9 @@ const getMovieById = createAsyncThunk(
 
 const getMoviesBySearch = createAsyncThunk(
     'moviesListSlice/getMoviesBySearch',
-    async ({search}, {rejectWithValue}) => {
+    async ({name, page}, {rejectWithValue}) => {
         try {
-            const {data} = await moviesService.getMoviesBySearch(search);
+            const {data} = await moviesService.getMoviesBySearch(name, page);
             return data;
         } catch (e) {
             return rejectWithValue(e.response.data);
@@ -55,7 +55,7 @@ const moviesListSlice = createSlice({
         builder
             .addCase(getMovies.fulfilled, (state, action)=>{
                 state.moviesList = action.payload;
-                state.totalPages = action.payload.total_pages;
+                state.totalPages = action.payload.totalPages;
                 state.currentPage = action.payload.page;
 
             })
@@ -64,7 +64,7 @@ const moviesListSlice = createSlice({
             })
 
             .addCase(getMoviesBySearch.fulfilled, (state, action) => {
-                state.moviesSearch = action.payload.results;
+                state.moviesList = action.payload.results;
                 state.totalPages = action.payload.totalPages;
                 state.currentPage = action.payload.page;
             })
