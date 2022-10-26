@@ -4,9 +4,9 @@ import {moviesService} from "../../services";
 const initialState ={
     moviesList: [],
     totalPages: 1,
-    currentPage: 1,
+    actualPage: 1,
     movieInfo: {},
-    moviesSearch:[],
+    movieSearch:[],
     loading: false,
     errors: null,
 }
@@ -35,11 +35,11 @@ const getMovieById = createAsyncThunk(
     }
 );
 
-const getMoviesBySearch = createAsyncThunk(
+const search = createAsyncThunk(
     'moviesListSlice/getMoviesBySearch',
     async ({name, page}, {rejectWithValue}) => {
         try {
-            const {data} = await moviesService.getMoviesBySearch(name, page);
+            const {data} = await moviesService.searchByName(name, page);
             return data;
         } catch (e) {
             return rejectWithValue(e.response.data);
@@ -56,17 +56,17 @@ const moviesListSlice = createSlice({
             .addCase(getMovies.fulfilled, (state, action)=>{
                 state.moviesList = action.payload;
                 state.totalPages = action.payload.totalPages;
-                state.currentPage = action.payload.page;
+                state.actualPage = action.payload.page;
 
             })
             .addCase(getMovieById.fulfilled,(state,action) =>{
                 state.movieInfo = action.payload;
             })
 
-            .addCase(getMoviesBySearch.fulfilled, (state, action) => {
+            .addCase(search.fulfilled, (state, action) => {
                 state.moviesList = action.payload.results;
                 state.totalPages = action.payload.totalPages;
-                state.currentPage = action.payload.page;
+                state.actualPage = action.payload.page;
             })
 
             .addDefaultCase((state, action) => {
@@ -81,7 +81,7 @@ const moviesListSlice = createSlice({
 
 const {reducer: moviesListReducer }  = moviesListSlice;
 
-const moviesListActions = {getMovies, getMovieById, getMoviesBySearch};
+const moviesListActions = {getMovies, getMovieById, search};
 
 export {moviesListActions, moviesListReducer}
 

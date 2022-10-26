@@ -8,17 +8,17 @@ import css from './MoviesList.module.css'
   const MoviesList = ({query}) => {
 
       const dispatch = useDispatch();
-      const {genre:data} = useSelector ( state => state.genre)
+      // const {genre:data} = useSelector ( state => state.genre)
       const {moviesList} = useSelector ( state => state.moviesList)
 
       useEffect( ()=>{
           dispatch(moviesListActions.getMovies({page: query.get('page')}))
       },  [dispatch, query]);
 
-        useEffect( ()=>{
-          dispatch(genreActions.getGenres())
-
-      },  [query, data]);
+      //   useEffect( ()=>{
+      //     dispatch(genreActions.getGenres())
+      //
+      // },  [query, data]);
 
    return (
         <div className={css.movieList}>

@@ -3,7 +3,8 @@ import {useSelector} from "react-redux";
 import css from './PaginationMoviesList.module.css'
 
 const PaginationMoviesList = ({actualPage, setQuery}) => {
-    const {currentPage} = useSelector(state => state.moviesList);
+
+    // const {totalPages} = useSelector(state => state.moviesList);
 
     const firstPage = () => {
         const page = actualPage = 1
@@ -16,7 +17,7 @@ const PaginationMoviesList = ({actualPage, setQuery}) => {
     };
 
     const nextPage = () => {
-        const page = actualPage + 1;
+        const page =  actualPage + 1;
         setQuery({page: `${page}`})
     };
 
@@ -39,3 +40,4 @@ const PaginationMoviesList = ({actualPage, setQuery}) => {
 };
 
 export {PaginationMoviesList};
+

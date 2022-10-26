@@ -14,10 +14,11 @@ const SearchInput = () => {
         setInputValue(e.target.value);
     };
 
-    const search = () => {
+        const search = () => {
         if (inputValue.length>1) {
-            dispatch(moviesListActions.getMoviesBySearch({name:inputValue,page:1}));
-            navigate(`/movieSearch?query =${inputValue}`);
+            dispatch(moviesListActions.search({name:inputValue, page:1}));
+            // navigate(`/search?query =${inputValue}`);
+            navigate(`/search?input=${inputValue}`);
             setInputValue('');
         } };
 

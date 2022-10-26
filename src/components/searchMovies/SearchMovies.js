@@ -8,20 +8,19 @@ import css from "./SearchMovies.module.css"
 
 const SearchMovies = () => {
 
+    const dispatch=useDispatch()
     const [query,_]=useSearchParams()
 
     const input=query.get('input')
 
-    const dispatch=useDispatch()
-
-    const {moviesList}=useSelector(state => state.moviesList)
+    const {moviesList,totalPages}=useSelector(state => state.moviesList)
 
     useEffect(()=>{
         if(input){
-            dispatch(moviesListActions.getMoviesBySearch({name: input, page: 1}))
+            dispatch(moviesListActions.search({name: input, totalPages}))
             }
 
-    },[input, dispatch, query])
+    },[input, dispatch, totalPages])
 
     return (
         <div className={css.searchList}>

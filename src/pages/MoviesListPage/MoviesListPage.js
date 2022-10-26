@@ -9,6 +9,7 @@ const MoviesListPage = () => {
 
     return (
         <div>
+
             <PaginationMoviesList actualPage={actualPage} setQuery={setQuery}/>
             <MoviesList query={query}/>
             <PaginationMoviesList actualPage={actualPage} setQuery={setQuery}/>

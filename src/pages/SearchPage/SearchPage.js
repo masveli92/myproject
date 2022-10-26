@@ -2,7 +2,6 @@ import {useSearchParams} from "react-router-dom";
 
 import {PaginationMoviesList, SearchMovies} from "../../components";
 
-
 const SearchPage = () => {
 
     const [query, setQuery] = useSearchParams({page: '1'});

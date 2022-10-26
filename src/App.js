@@ -12,7 +12,7 @@ const App = () => {
                 <Route index element={<Navigate to={'allMovies'}/>}/>
                 <Route path={'allMovies'} element={<MoviesListPage/>}/>
                 <Route path={'movieDetails:movieId'} element={<MoviePage/>}/>
-                <Route path={'movieSearch'} element={<SearchPage/>}/>
+                <Route path={'search'} element={<SearchPage/>}/>
             </Route>
                 <Route path={'*'} element={<NotFoundPage/>}/>
          </Routes>
